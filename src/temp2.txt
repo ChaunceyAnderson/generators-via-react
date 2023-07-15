@@ -1,0 +1,37 @@
+import React, { Component } from 'react';
+import './App.css';
+import { Form, Input, Select } from "./smart-form-components";
+export default class App extends Component {
+
+    constructor(props) {
+        super(props);
+        //inputData defines a json object with 2 properties: variableName and labelText 
+        this.inputData = [
+          {variableName: "functionHandlerName", labelText: "Name of function to call when button is clicked"},
+          {variableName: "buttonText", labelText: "The button text"},
+          {variableName: "cssClassName", labelText: "The css class name"}
+        ];
+    }
+
+    onSubmit = (data) => console.log(data);
+
+    iterateOverItems = (inputData) =>
+      inputData.map((item) => {
+      return (
+        <Input
+          name={item.variableName}
+        />
+      );
+    });
+
+    render() {
+      return <>
+      <h1>Smart Form Component</h1>
+      <Form onSubmit={this.onSubmit}>
+        {this.iterateOverItems(this.inputData)}
+
+        <button>Submit</button>
+      </Form>
+    </>
+    }
+}
